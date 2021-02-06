@@ -1,7 +1,66 @@
-
-.clearfix::after {
+.w-clearfix::after {
     content: "";
     display: block;
     clear: both;
     visibility: hidden; 
+}
+
+.w-cup {
+    cursor: pointer;
+}
+/* 居中 */
+.w-center_p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.w-center_grid {
+    display: grid;
+    place-items: center;
+}
+
+/* 文本禁止选中 */
+.w-txt_none {
+    -moz-user-select:none; /*火狐*/
+    -webkit-user-select:none; /*webkit浏览器*/
+    -ms-user-select:none; /*IE10*/
+    -khtml-user-select:none; /*早期浏览器*/
+    user-select:none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* 文本多行显示超出折叠显示三点 */
+/* 单行 */
+.w-txt_row {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: keep-all;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+/* 多行 3行 */
+.w-txt_row--s {
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* 隐藏滚动条 */
+.w-scroll_off {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+/* 文本域右下角斜线隐藏 */
+.w-tr_off {
+    resize: none
 }
