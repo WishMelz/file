@@ -1,0 +1,40 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+</head>
+<style>
+    a {
+        display: block;
+    }
+</style>
+<body>
+    <ul>
+        <a href=""></a>
+    </ul>
+</body>
+<script src="./js/ajax.js"></script>
+<script>
+
+
+// {/* https://api.github.com/repos/wozuinbs/video/contents/mini */}
+// https://api.github.com/repos/wozuinbs/video/contents/mini?q=addClass&page=1&per_page=100
+  ajax({
+
+            type: "get",
+            url: "https://api.github.com/repos/wozuinbs/video/git/trees/30450e11171827542c972cf1568369b6f9a2ea6b",
+            beforeSend: function () {
+                //some js code 
+            },
+            success: function (msg) {
+                let data = JSON.parse(msg)
+                console.log(data);
+            },
+            error: function () {
+                console.log("error")
+            }
+        })
+</script>
+</html>
