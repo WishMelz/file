@@ -1,5 +1,5 @@
-### d DDos-Attack
 
-### chmod +x ddos-attack.py
 
-### python ddos-attack.py
+### chmod +x ddos.py
+
+### python ddos.py
