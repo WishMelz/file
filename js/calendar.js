@@ -645,5 +645,5 @@
       return parseInt((date.getTime() - now.getTime()) / (24 * 3600 * 1000));
     }
   };
-  module.exports = calendar;
-//   calendar
+// Vue使用的时候打开这个
+// module.exports = calendar;
