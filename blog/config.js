@@ -2,8 +2,8 @@ let blogData = {
     routers: [
        
         {
-            name: "工具箱🧰",
-            link: "http://tool.v2ex.fun",
+            name: "工具箱",
+            link: "https://utools.cc/",
             icon: ""
         },
         {
