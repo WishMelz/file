@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    #fastpostsubmit
+    #fastpostmessage
+    document.querySelector('#fastpostmessage').value = '2022.3.5每日一水' + Math.random();
+
+    document.querySelector('#fastpostsubmit').click();
+
+    (function () {
+
+        let startNum = 0; //总量
+        let countNum = 0;  // 当前小时数量
+
+        let setTimes = () => {
+            let times = setInterval(() => {
+                let newDate = new Date();
+                let strData = `${newDate.getFullYear()}-${newDate.getMonth() + 1}-${newDate.getDate()} ${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`
+                if (startNum >= 150) {
+                    clearInterval(times);
+                    return;
+                }
+                document.querySelector('#fastpostmessage').value = `终究一天我会成为使徒`
+                document.querySelector('#fastpostsubmit').click();
+                console.log(`${strData},当前小时的第${countNum}次，总次数为：${startNum}`);
+                startNum++;
+                countNum++;
+                if (countNum >= 30) {
+                    console.log(`${strData},当前小时次数已满30清理，等到下一个小时运行`);
+                    clearInterval(times);
+                    countNum = 0;
+                    setTimeout(() => {
+                        setTimes();
+                    }, 1000 * 60 * 60)
+                }
+
+            }, 1000 * 30);
+        }
+
+        setTimeout(() => { setTimes(); }, 1000 * 60 * 60 * 4)
+
+    })()
+
+
+    // https://dnf.gamebbs.qq.com/plugin.php?id=k_misign:sign
+
+    document.querySelector('#fastpostsubmit').click();
+
+
+    (function () {
+        // location.href = 'https://dnf.gamebbs.qq.com/plugin.php?id=k_misign:sign';
+        document.querySelector('#JD_sign').click()
+        // setTimeout(()=>{
+        //     console.log( document.querySelector('#JD_sign'));
+        // },2000)
+    })()
+    // #JD_sign
+
+    // #typeid_float_ctrl_menu > ul > li:nth-child(2)
+
+    document.querySelector('#newspecialtmp > span').click();
+    document.querySelector('#typeid_float_ctrl_menu > ul > li:nth-child(2)').click();
+
+    document.querySelector('#subject').value = `每日一水`;
+    document.querySelector('#postmessage').value = `每日一水`;
+
+
+
+    document.querySelector('#postsubmit').click();
+
+
+    // #fwin_dialog_close
+    (function () {
+        let num = 1;
+        let flg = true;
+        function postSub() {
+            document.querySelector('#newspecialtmp > span').click();
+            setTimeout(()=>{
+                document.querySelector('#typeid_float_ctrl_menu > ul > li:nth-child(2)').click();
+                document.querySelector('#subject').value = `每日一水${num}`;
+                document.querySelector('#postmessage').value = `每日一水`;
+                document.querySelector('#postsubmit').click();
+            
+                let newDate = new Date();
+                let strData = `${newDate.getFullYear()}-${newDate.getMonth() + 1}-${newDate.getDate()} ${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`
+                console.log(`${strData} 第${num}次发送帖子`);
+                num++;
+                setTimeout(()=>{
+                    document.querySelector('#fwin_dialog_close').click();
+                },3000)
+            },1000)
+        }
+        function setEverday(){
+            let postTIme = setInterval(()=>{
+            if(num >= 6){
+                num = 1;
+                flg = false;
+                clearInterval(postTIme);
+                return;
+            }
+            postSub();
+        },1000 * 30)
+        }
+        setInterval(()=>{
+                let time = new Date();
+                let h = time.getHours();
+
+                if(h == 9){
+                    if(flg){
+                        setEverday();
+                    }
+                }
+                if(h == 12){
+                    flg = true;
+                }
+            },1000*60*60)
+    })()
+
+</script>
+
+</html>
