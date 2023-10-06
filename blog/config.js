@@ -3,7 +3,7 @@ let blogData = {
        
         {
             name: "工具箱",
-            link: "https://utools.cc/",
+            link: "https://tools.itsse.cn/",
             icon: ""
         },
         {
