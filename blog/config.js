@@ -7,8 +7,8 @@ let blogData = {
             icon: ""
         },
         {
-            name: "图床",
-            link: "https://imgurl.icu",
+            name: "Github",
+            link: "https://github.com/WishMelz",
             icon: ""
         }
     ]
