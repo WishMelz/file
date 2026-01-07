@@ -43,18 +43,38 @@ domains=(
   prod.us-east-1.ui.gcr-chat.marketing.aws.dev
 )
 
-# 随机打乱并取 10 个
+# 选 10 个
 selected_domains=$(printf "%s\n" "${domains[@]}" | shuf | head -n 10)
 
-echo "Testing TLS handshake latency (random 10 domains):"
-echo "--------------------------------------------------"
+echo "Testing TLS handshake latency (random 10 domains, sorted):"
+echo "--------------------------------------------------------"
+
+# 临时文件收集结果
+tmpfile="$(mktemp)"
+
+# 超时/失败统一给一个很大的数，便于排序时放到最后
+TIMEOUT_SENTINEL=999999
 
 for d in $selected_domains; do
   t1=$(date +%s%3N)
   if timeout 1 openssl s_client -connect "$d:443" -servername "$d" </dev/null &>/dev/null; then
     t2=$(date +%s%3N)
-    echo "$d: $((t2 - t1)) ms"
+    ms=$((t2 - t1))
+    # 记录：ms<TAB>domain
+    printf "%s\t%s\n" "$ms" "$d" >> "$tmpfile"
   else
-    echo "$d: timeout"
+    # 失败/超时：999999<TAB>domain
+    printf "%s\t%s\n" "$TIMEOUT_SENTINEL" "$d" >> "$tmpfile"
   fi
 done
+
+# 排序输出：ms 小的在前；999999 显示为 timeout
+sort -n -k1,1 "$tmpfile" | while IFS=$'\t' read -r ms d; do
+  if [[ "$ms" == "$TIMEOUT_SENTINEL" ]]; then
+    echo "$d: timeout"
+  else
+    echo "$d: ${ms} ms"
+  fi
+done
+
+rm -f "$tmpfile"
